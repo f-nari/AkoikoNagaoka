@@ -22,7 +22,12 @@ const Header = () => {
         name:'event',
         displayname:'イベント',
         url:'/event'
-    },
+    },{
+        name:'newdataadd',
+        displayname:'新規登録',
+        url:'/newdataadd'
+    }
+    
 ]
 
     return (
