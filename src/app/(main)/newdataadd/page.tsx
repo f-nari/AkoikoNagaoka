@@ -1,6 +1,4 @@
 'use client'
-
-import { supabase } from "../../../../lib/supabase"
 import { useState } from "react"
 import { foodDataAdd } from "@/actions/dataGetActions";
 
@@ -8,7 +6,7 @@ const NewDataAddpage = () => {
   //これは、formのselectの値によって、formの行く先が変わるのでその関数
   const newDataAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formdata = new FormData(e.currentTarget)    
+    const formdata = new FormData(e.currentTarget)
     const selectedType = formdata.get("type") as string; // ✅ formData から取得
     switch (selectedType) {
       case '飲食店':
@@ -22,8 +20,6 @@ const NewDataAddpage = () => {
         break;
     }
   }
-
-  
 
   const [typeValue, setTypeValue] = useState<string>('飲食店')
   return (
