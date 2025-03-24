@@ -10,6 +10,7 @@ import o from '../../../../picture/o.png'
 import ka from '../../../../picture/ka.png'
 
 const HeaderLogo = () => {
+    
     return (
         <div>
             <div className='flex justify-center h-30'>

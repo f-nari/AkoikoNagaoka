@@ -1,13 +1,22 @@
 import Footer from "@/components/FooterHeader/Footer";
 import Header from "@/components/FooterHeader/Header/Header";
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 
-
-const mainLayout = ({
+const mainLayout = async ({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) => {
+    //ラップする
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+        redirect('/login');  // ログインページのパスにリダイレクト
+    }
+
     return (
+
         <div>
             <Header />
             <div className=' flex justify-center  '>
@@ -21,3 +30,4 @@ const mainLayout = ({
 }
 
 export default mainLayout
+
