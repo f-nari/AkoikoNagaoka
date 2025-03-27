@@ -1,32 +1,15 @@
-import Image from 'next/image';
-import testPicture from '../../picture/test.png'
-import Card from '@/components/Card/Card';
+import Card from '@/components/Card/Card'
+import React from 'react'
+import { foodDataGetActions } from '@/actions/dataGetActions'
 
-export default async function Home() {
-
+const foodPage = async () => {
+  
+  const datas = await foodDataGetActions()
   return (
-    <div className=''>
-      <div className='flex justify-center '>
-        <Image
-          src={testPicture}
-          width={500}
-          height={500}
-          alt="Picture of the author"
-          className='mt-5 mb-5'
-        />
-      </div>
-      <div className='flex justify-center '>
-        <div className=' h-screen  '>
-          <div className='mt-5 ml-3 mb-5'>
-            おすすめ
-          </div>
-          <div>
-            {/* <Card></Card> */}
-          </div>
-        </div>
-      </div>
-
+    <div className='mt-3'>
+        <Card datas={datas}></Card>
     </div>
-  );
+  )
 }
 
+export default foodPage
