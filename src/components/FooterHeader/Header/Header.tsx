@@ -7,14 +7,14 @@ export type HeaderItemsType =  {
 }
 const Header = () => {
     const headeritems:HeaderItemsType[] = [{
-        name:'main',
-        displayname:'おすすめ',
-        url:'/'
-    },{
         name:'food',
         displayname:'飲食店',
-        url:'/food'
-    },{
+        url:'/'},{
+    // },{
+    //     name:'food',
+    //     displayname:'飲食店',
+    //     url:'/food'
+    // },{
         name:'park',
         displayname:'公園',
         url:'/park'
