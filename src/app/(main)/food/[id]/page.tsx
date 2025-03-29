@@ -22,7 +22,7 @@ const FoodDetailPage = () => {
     }, [foodId])
 
     return (
-        <div className="  w-4/5 ">
+        <div className=" w-4/5 ">
             {fooddatas.map((data)=> {
                 return <Detail key={data.id} data={data}></Detail>
             })}

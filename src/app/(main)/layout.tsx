@@ -17,9 +17,9 @@ const mainLayout = async ({
 
     return (
 
-        <div>
+        <div className="flex flex-col min-h-screen">
             <Header />
-            <div className=' flex justify-center  '>
+            <div className=' flex justify-center flex-grow  '>
                 <div className='w-4/5  flex justify-center '>
                     {children}
                 </div>
