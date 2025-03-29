@@ -10,11 +10,6 @@ const Header = () => {
         name:'main',
         displayname:'飲食店',
         url:'/'
-    // },{
-    //     name:'food',
-    //     displayname:'飲食店',
-    //     url:'/food'
-    // },{
     },{name:'park',
         displayname:'公園',
         url:'/park'
