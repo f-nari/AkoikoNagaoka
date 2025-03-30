@@ -1,6 +1,6 @@
 'use client'
 import { useRef, useState } from "react"
-import { foodDataAdd } from "@/actions/dataGetActions";
+import { foodDataAdd, parkDataAdd } from "@/actions/dataGetActions";
 
 const NewDataAddpage = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -11,11 +11,11 @@ const NewDataAddpage = () => {
     const selectedType = formdata.get("type") as string; // ✅ formData から取得
     switch (selectedType) {
       case '飲食店':
-        // console.log('飲食店の登録に移ります');
         await foodDataAdd(formdata)
-
         break;
       case '公園':
+        console.log('公園の画像を保存します');
+        await parkDataAdd(formdata)
         break;
       case 'イベント':
         break;
