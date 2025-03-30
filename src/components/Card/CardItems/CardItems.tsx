@@ -1,8 +1,10 @@
+'use client'
 import { dataTypes } from '@/actions/dataGetActions'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const CardItems = ({ data }: { data: dataTypes }) => {
+    
     return (
         <div className="bg-amber-50 w-56 h-60 rounded-2xl flex flex-col shadow-md p-3">
             {/* 画像エリア */}
@@ -27,7 +29,7 @@ const CardItems = ({ data }: { data: dataTypes }) => {
 
                 {/* 詳細ボタン */}
                 <Link
-                    href={`/food/${data.id}`}
+                    href={`/${data.url}/${data.id}`}
                     className="text-sm px-2 py-2 font-bold bg-[#eb6100] hover:bg-[#f56500] text-white rounded-full transition duration-300"
                 >
                     詳細へ

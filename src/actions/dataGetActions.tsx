@@ -12,24 +12,41 @@ export type dataTypes = {
   tatami?: boolean,
   holiday?: string,
   toilet?: boolean,
-  wash?: boolean
+  wash?: boolean,
+  url?:string
 }
 
 const supabase  = createClient()
 
 export const foodDataGetActions = async () => {
   const { data, error } = await supabase.from('fooddatas').select();
-  const fooddatas: dataTypes[] = await data as dataTypes[]
+  const fooddata: dataTypes[] = await data as dataTypes[]
+  const fooddatas = fooddata.map((data) => ({...data,url:'food'}))
   return fooddatas
 }
 
+export const parkDataGetActions = async () => {
+  const { data, error } = await supabase.from('parkdatas').select();
+  const parkdata: dataTypes[] = await data as dataTypes[]
+  const parkdatas = parkdata.map((data) => ({...data,url:'park'}))
+  return parkdatas
+}
+
+//詳細画面で店の情報を見るときの関数
 export const foodDataGetActionsWithID = async (foodid: string) => {
   const { data, error } = await supabase.from('fooddatas').select().eq('id', foodid);
   return data
 }
 
-//foodデータベースにつながるアクションズを書く
+//詳細画面で公園の情報を見るときの関数
+export const parkDataGetActionsWithID = async (parkid: string) => {
+  const { data, error } = await supabase.from('parkdatas').select().eq('id', parkid);
+  return data
+}
 
+
+
+//foodデータベースにつながるアクションズを書く
 export const foodDataAdd = async (FormData: FormData) => {
   try {
     //まず、ファイルをストレージにアップロード。
@@ -73,12 +90,43 @@ export const foodDataAdd = async (FormData: FormData) => {
 }
 
 export const parkDataAdd = async (FormData: FormData) => {
-  const today = new Date()
-  const { error } = await supabase.from('parkdatas').insert({
-    title: FormData.get('title'),
-    address: FormData.get('address'),
-    created_date: today,
-    toilet: FormData.get('toilet'),
-    wash: FormData.get('wash')
-  })
+  try {
+    //まず、ファイルをストレージにアップロード。
+    const file = await FormData.get('image')
+    if (!(file instanceof File)) {
+      console.error("⚠️ 画像ファイルが取得できませんでした");
+      return;
+    }
+
+    console.log("📂 取得したファイル:", file);
+    const filePath = file.name
+    const { error } = await supabase.storage
+      .from('parkimages')
+      .upload(filePath, file)
+
+    if (error) {
+      console.error("❌ 画像アップロード失敗:", error.message);
+      return;
+    }
+    console.log("✅ 画像アップロード成功:");
+
+    const { data } = supabase.storage.from('parkimages').getPublicUrl(filePath)
+    const imageUrl = data.publicUrl
+    console.log(imageUrl);
+
+    const today = new Date()
+    const { } = await supabase.from('parkdatas').insert({
+      title: FormData.get('title'),
+      address: FormData.get('address'),
+      created_date: today,
+      toilet: FormData.get('toilet'),
+      wash: FormData.get('wash'),
+      image_url: imageUrl,
+    })
+
+  } catch (error) {
+    console.log('エラーが出ました', error);
+
+  }
+
 }
