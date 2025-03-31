@@ -32,6 +32,13 @@ export const parkDataGetActions = async () => {
   return parkdatas
 }
 
+export const eventDataGetActions = async () => {
+  const { data, error } = await supabase.from('eventdatas').select();
+  const eventdata: dataTypes[] = await data as dataTypes[]
+  const eventdatas = eventdata.map((data) => ({...data,url:'event'}))
+  return eventdatas
+}
+
 //詳細画面で店の情報を見るときの関数
 export const foodDataGetActionsWithID = async (foodid: string) => {
   const { data, error } = await supabase.from('fooddatas').select().eq('id', foodid);
@@ -41,6 +48,12 @@ export const foodDataGetActionsWithID = async (foodid: string) => {
 //詳細画面で公園の情報を見るときの関数
 export const parkDataGetActionsWithID = async (parkid: string) => {
   const { data, error } = await supabase.from('parkdatas').select().eq('id', parkid);
+  return data
+}
+
+//詳細画面でイベントの情報を見るときの関数
+export const eventDataGetActionsWithID = async (eventid: string) => {
+  const { data, error } = await supabase.from('eventdatas').select().eq('id', eventid);
   return data
 }
 
@@ -121,6 +134,46 @@ export const parkDataAdd = async (FormData: FormData) => {
       created_date: today,
       toilet: FormData.get('toilet'),
       wash: FormData.get('wash'),
+      image_url: imageUrl,
+    })
+
+  } catch (error) {
+    console.log('エラーが出ました', error);
+
+  }
+
+}
+
+export const eventDataAdd = async (FormData: FormData) => {
+  try {
+    //まず、ファイルをストレージにアップロード。
+    const file = await FormData.get('image')
+    if (!(file instanceof File)) {
+      console.error("⚠️ 画像ファイルが取得できませんでした");
+      return;
+    }
+
+    console.log("📂 取得したファイル:", file);
+    const filePath = file.name
+    const { error } = await supabase.storage
+      .from('eventimages')
+      .upload(filePath, file)
+
+    if (error) {
+      console.error("❌ 画像アップロード失敗:", error.message);
+      return;
+    }
+    console.log("✅ 画像アップロード成功:");
+
+    const { data } = supabase.storage.from('eventimages').getPublicUrl(filePath)
+    const imageUrl = data.publicUrl
+    console.log(imageUrl);
+
+    const today = new Date()
+    const { } = await supabase.from('eventdatas').insert({
+      title: FormData.get('title'),
+      address: FormData.get('address'),
+      created_date: today,
       image_url: imageUrl,
     })
 

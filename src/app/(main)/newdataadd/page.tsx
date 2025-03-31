@@ -1,6 +1,6 @@
 'use client'
 import { useRef, useState } from "react"
-import { foodDataAdd, parkDataAdd } from "@/actions/dataGetActions";
+import { eventDataAdd, foodDataAdd, parkDataAdd } from "@/actions/dataGetActions";
 
 const NewDataAddpage = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -18,6 +18,7 @@ const NewDataAddpage = () => {
         await parkDataAdd(formdata)
         break;
       case 'イベント':
+        await eventDataAdd(formdata)
         break;
     }
 
