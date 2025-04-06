@@ -1,31 +1,49 @@
 "use client"
 
-import { User } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 import type { HeaderItemsType } from "../Header";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 type HeaderItemsProps = {
     headeritems: HeaderItemsType[];
     user_name: string;
-  };
+};
 
 const HeaderItems = ({ headeritems, user_name }: HeaderItemsProps) => {
-    const pathname = usePathname()
-    console.log('usernameです');
-    console.log(user_name);
-    
+    // const pathname = usePathname()
+
+    const [mountedPath, setMountedPath] = useState<string | null>(null)
+
+    useEffect(() => {
+        setMountedPath(window.location.pathname)
+    }, [])
 
     return (
         <div>
             <div className='border-b border-gray-300 flex justify-center '>
-                <div>{user_name}</div>
-                <div className='flex justify-center w-4/5 mt-5  '>
-                    {headeritems.map((item) => {
-                        return <a className={`pt-1 w-20 mr-2 rounded-t-sm text-center hover:bg-gray-100 ${pathname === item.url ? "bg-gray-200 border-b-4 border-b-green-500" : ''}`} key={item.url} href={item.url}>
+                <div className='flex justify-around w-full  mt-5  '>
+                    <div>これはアイコンはいる</div>
+                    <div>
+                        {/* {headeritems.map((item) => {
+                        return <a className={`pt-2 px-4  w-30 mr-5 rounded-t-sm text-center hover:bg-gray-100 ${pathname === item.url ? "bg-gray-200 border-b-4 border-b-green-500" : ''}`} key={item.url} href={item.url}>
                             {item.displayname}
                         </a>
-                    })}
+                    })} */}
+                        {mountedPath &&
+                            headeritems.map((item) => {
+                                const isActive = mountedPath === item.url;
+                                return (
+                                    <Link key={item.url} href={item.url} className={`pt-2 px-4 w-30 mr-5 rounded-t-sm text-center hover:bg-gray-100 ${isActive ? "bg-gray-200 border-b-4 border-b-green-500" : ""}`}>
+                                      
+                                      {item.displayname}
+                                  </Link>
+                                );
+                            })}
+                    </div>
+                    <div>{user_name}さん</div>
                 </div>
+
             </div>
         </div>
     )
