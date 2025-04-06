@@ -15,10 +15,13 @@ const mainLayout = async ({
         redirect('/login');  // ログインページのパスにリダイレクト
     }
 
+    const user_data = user
+
     return (
 
         <div className="flex flex-col min-h-screen">
-            <Header />
+            <Header user_data = {user_data}/>
+            
             <div className=' flex justify-center flex-grow  '>
                 <div className='w-4/5  flex justify-center '>
                     {children}

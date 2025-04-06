@@ -1,3 +1,4 @@
+import { User } from "@supabase/supabase-js"
 import HeaderItems from "./HeaderItems/HeaderItems"
 import HeaderLogo from "./HeaderItems/HeaderLogo"
 export type HeaderItemsType =  {
@@ -5,7 +6,14 @@ export type HeaderItemsType =  {
     displayname:string,
     url:string
 }
-const Header = () => {
+
+type Props = {
+    user_data: User;
+  };
+
+
+const Header = ({user_data}:Props) => {
+    const user_name = user_data.user_metadata?.name
     const headeritems:HeaderItemsType[] = [{
         name:'main',
         displayname:'飲食店',
@@ -22,13 +30,14 @@ const Header = () => {
         displayname:'新規登録',
         url:'/newdataadd'
     }
+
     
 ]
 
     return (
         <div>
             <HeaderLogo></HeaderLogo>
-            <HeaderItems headeritems = {headeritems}></HeaderItems>
+            <HeaderItems headeritems = {headeritems} user_name = {user_name} ></HeaderItems>
         </div>
     )
 }
