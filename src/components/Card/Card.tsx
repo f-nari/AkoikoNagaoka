@@ -16,3 +16,4 @@ const Card = ({datas}:{datas:dataTypes[]} ) => {
 }
 
 export default Card
+
