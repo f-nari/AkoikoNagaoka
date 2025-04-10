@@ -1,8 +1,7 @@
 "use client"
 import type { HeaderItemsType } from "../Header";
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
+import { usePathname } from "next/navigation";
 import { Logout } from "@/actions/Logout";
 
 type HeaderItemsProps = {
@@ -12,19 +11,6 @@ type HeaderItemsProps = {
 
 const HeaderItems = ({ headeritems, user_name }: HeaderItemsProps) => {
     const pathname = usePathname()
-    // const Logout = async () => {
-    //     try {
-    //         console.log('ログアウトボタンが押されました');
-    //         const supabase = await createClient()
-    //         const { error } = await supabase.auth.signOut()
-    //         console.log('ログアウト完了');
-
-    //     } catch (error) {
-    //         console.log('errorです',error);
-            
-    //     }
-
-    // }
 
 
     return (
@@ -38,7 +24,7 @@ const HeaderItems = ({ headeritems, user_name }: HeaderItemsProps) => {
                             </Link>
                         })}
                     </div>
-                    <div>{user_name}さん　こんにちは</div>
+                    <div>{user_name}さん こんにちは</div>
                     <form action={Logout}>
                         <button type="submit" className="hover:bg-gray-100 cursor-pointer">ログアウト</button>
                     </form>
