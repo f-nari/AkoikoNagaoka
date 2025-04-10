@@ -22,6 +22,8 @@ const ParkDetailPage = () => {
         }
     }, [parkId])
 
+    console.log('これがデータ取得したID',parkdatas);
+
     return (
         <div className=" w-4/5 ">
             {parkdatas.map((data)=> {

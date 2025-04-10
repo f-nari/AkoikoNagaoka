@@ -42,19 +42,22 @@ export const eventDataGetActions = async () => {
 //詳細画面で店の情報を見るときの関数
 export const foodDataGetActionsWithID = async (foodid: string) => {
   const { data, error } = await supabase.from('fooddatas').select().eq('id', foodid);
-  return data
+  const fooddatas = data?.map((data) => ({...data,url:'food'}))
+  return fooddatas
 }
 
 //詳細画面で公園の情報を見るときの関数
 export const parkDataGetActionsWithID = async (parkid: string) => {
   const { data, error } = await supabase.from('parkdatas').select().eq('id', parkid);
-  return data
+  const parkdatas = data?.map((data) => ({...data,url:'park'}))
+  return parkdatas
 }
 
 //詳細画面でイベントの情報を見るときの関数
 export const eventDataGetActionsWithID = async (eventid: string) => {
   const { data, error } = await supabase.from('eventdatas').select().eq('id', eventid);
-  return data
+  const eventdatas = data?.map((data) => ({...data,url:'event'}))
+  return eventdatas
 }
 
 
