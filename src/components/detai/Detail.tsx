@@ -2,7 +2,7 @@ import { dataTypes } from "@/actions/dataGetActions"
 import Image from "next/image"
 
 const Detail = ({ data }: { data: dataTypes }) => {
-    // console.log('これがデータ詳細ページに渡されているdataです',data);
+    //  console.log('これがデータ詳細ページに渡されている画像URLです',data.image_url);
     
     return (
         <div className="flex h-screen p-5 gap-5">
