@@ -22,6 +22,7 @@ const EventDetailPage = () => {
         }
     }, [eventId])
 
+
     return (
         <div className=" w-4/5 ">
             {parkdatas.map((data)=> {

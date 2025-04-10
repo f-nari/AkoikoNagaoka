@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const CardItems = ({ data }: { data: dataTypes }) => {
-    
     return (
         <div className="bg-amber-50 w-56 h-60 rounded-2xl flex flex-col shadow-md p-3">
             {/* 画像エリア */}
@@ -22,9 +21,11 @@ const CardItems = ({ data }: { data: dataTypes }) => {
             <div className="flex justify-between items-center mt-3">
                 <div className="w-24 text-center">
                     <div className="text-[15px] truncate font-bold">{data.title}</div>
-                    <p className="text-[13px]">
-                        座敷 <span className={data.tatami ? "text-orange-500 font-bold" : "text-gray-500"}>{data.tatami ? 'あり' : 'なし'}</span>
-                    </p>
+                    {data.url === 'food' &&
+                        <p className="text-[13px]">
+                            座敷 <span className={data.tatami ? "text-orange-500 font-bold" : "text-gray-500"}>{data.tatami ? 'あり' : 'なし'}</span>
+                        </p>
+                    }
                 </div>
 
                 {/* 詳細ボタン */}
