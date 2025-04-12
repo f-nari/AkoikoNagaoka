@@ -19,21 +19,21 @@ export type dataTypes = {
 const supabase  = createClient()
 
 export const foodDataGetActions = async () => {
-  const { data, error } = await supabase.from('fooddatas').select();
+  const { data, error } = await supabase.from('fooddatas').select('*');
   const fooddata: dataTypes[] = await data as dataTypes[]
   const fooddatas = fooddata.map((data) => ({...data,url:'food'}))
   return fooddatas
 }
 
 export const parkDataGetActions = async () => {
-  const { data, error } = await supabase.from('parkdatas').select();
+  const { data, error } = await supabase.from('parkdatas').select('*');
   const parkdata: dataTypes[] = await data as dataTypes[]
   const parkdatas = parkdata.map((data) => ({...data,url:'park'}))
   return parkdatas
 }
 
 export const eventDataGetActions = async () => {
-  const { data, error } = await supabase.from('eventdatas').select();
+  const { data, error } = await supabase.from('eventdatas').select('*');
   const eventdata: dataTypes[] = await data as dataTypes[]
   const eventdatas = eventdata.map((data) => ({...data,url:'event'}))
   return eventdatas

@@ -5,8 +5,7 @@ import Link from 'next/link'
 
 const CardItems = ({ data }: { data: dataTypes }) => {
 
-    // console.log('選択画面の画像のURL',data.image_url);
-    
+
     return (
         <div className="bg-amber-50 w-56 h-60 rounded-2xl flex flex-col shadow-md p-3">
             {/* 画像エリア */}

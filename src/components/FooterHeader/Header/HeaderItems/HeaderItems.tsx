@@ -12,7 +12,6 @@ type HeaderItemsProps = {
 const HeaderItems = ({ headeritems, user_name }: HeaderItemsProps) => {
     const pathname = usePathname()
 
-
     return (
         <div>
             <div className='border-b border-gray-300 flex justify-center '>

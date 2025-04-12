@@ -16,6 +16,7 @@ const mainLayout = async ({
     }
 
     const user_data = user
+    
 
     return (
 
