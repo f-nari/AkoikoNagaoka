@@ -13,6 +13,8 @@ type Props = {
 
 
 const Header = ({user_data}:Props) => {
+    
+    
     const user_name = user_data.user_metadata?.name
     const headeritems:HeaderItemsType[] = [{
         name:'main',
